@@ -29,6 +29,8 @@ public class SteamTest extends TestBase {
             lowerLogin = $("#content_login"),
             footer = $("#footer");
 
+
+
     public SteamTest openMainPage() {
         open(baseUrl);
         return this;
@@ -60,89 +62,79 @@ public class SteamTest extends TestBase {
         return this;
     }
 
-//    public SteamTest inspectMainContentBlock() {
-//
-//        List<ElementsCollection> firstElement = new ArrayList<>();
-//        List<ElementsCollection> secondElement = new ArrayList<>();
-//        List<ElementsCollection> thirdElement = new ArrayList<>();
-//
-//        firstElement.add($$(".store_main_capsule").filterBy(visible));
-//        sleep(50);
-//
-//        $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
-//        sleep(100);
-//
-//        secondElement.add($$(".store_main_capsule").filterBy(visible));
-//
-//        assertThat(firstElement).isNotEqualTo(secondElement);
-//
-//        $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
-//        sleep(100);
-//
-//        thirdElement.add($$(".store_main_capsule").filterBy(visible));
-//
-//        assertThat(firstElement).isEqualTo(thirdElement);
-//
-//        return this;
-//    }
-
-    public SteamTest inspectSpecialOffers() {
+    public SteamTest inspectMainContentBlock() {
 
         List<ElementsCollection> firstElement = new ArrayList<>();
-        List<ElementsCollection> firstElement4 = new ArrayList<>();
-        List<SelenideElement> firstElement2 = new ArrayList<>();
-        List<SelenideElement> firstElement3 = new ArrayList<>();
-        sleep(300);
-        spotlightCarousel.scrollTo();
-        sleep(500);
-//        firstElement2.add($(".home_special_offers_group").find("home_area_spotlight"));
-        firstElement.add(spotlightCarousel.$$(".home_special_offers_group").filterBy(visible));
-//        firstElement2.add(spotlightCarousel.$(".responsive_scroll_snap_start app_impression_tracked").lastChild());
+        List<ElementsCollection> secondElement = new ArrayList<>();
 
-//        firstElement2.add(spotlightCarousel);
-//        firstElement2.add($x("//*[@id=\"spotlight_carousel\"]/div[1]/div[1]/div[1]"));
-//        System.out.println(firstElement2.size());
-//        for (SelenideElement e:firstElement2) {
-//            System.out.println(e);
-//
-//        }
-        sleep(500);
-        for (ElementsCollection e:firstElement) {
-            System.out.println(e);
+        firstElement.add($$(".store_main_capsule").filterBy(visible));
 
-        }
+        $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
 
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~");
+        secondElement.add($$(".store_main_capsule").filterBy(visible));
 
-        $x("//*[@id=\"spotlight_carousel\"]/div[4]").scrollTo().click();
-        sleep(500);
-//        firstElement3.add($(".home_special_offers_group").find("home_area_spotlight"));
-//            firstElement3.add(spotlightCarousel.$(".responsive_scroll_snap_start app_impression_tracked").lastChild());
-        firstElement4.add(spotlightCarousel.$$(".home_special_offers_group").filterBy(visible));
-//        firstElement3.add(spotlightCarousel);
-//        firstElement3.add($x("//*[@id=\"spotlight_carousel\"]/div[1]/div[2]/div[1]"));
-        for (ElementsCollection e:firstElement4) {
-            System.out.println(e);
+        assertThat(firstElement).isNotEqualTo(secondElement);
+        secondElement.clear();
 
-        }
-        assertThat(firstElement3).isNotEqualTo(firstElement2);
-
-        $x("//*[@id=\"spotlight_carousel\"]/div[3]").click();
-
+        $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
         sleep(100);
-        firstElement4.clear();
-        firstElement4.add(spotlightCarousel.$$(".carousel_items responsive_scroll_snap_ctn").filterBy(visible).filterBy(cssClass("focus")));
 
-        for (ElementsCollection e:firstElement4) {
-            System.out.println(e);
+        secondElement.add($$(".store_main_capsule").filterBy(visible));
 
-        }
-
-        assertThat(firstElement).isEqualTo(firstElement4);
+        assertThat(firstElement).isEqualTo(secondElement);
 
         return this;
     }
 
+    public SteamTest inspectSpecialOffers() {
 
+        List<ElementsCollection> firstElement = new ArrayList<>();
+        List<ElementsCollection> secondElement = new ArrayList<>();
 
+        spotlightCarousel.scrollTo();
+
+        firstElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        $x("//*[@id=\"spotlight_carousel\"]/div[4]").scrollTo().click();
+
+        secondElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        assertThat(firstElement).isNotEqualTo(secondElement.get(0));       // get0?
+
+        $x("//*[@id=\"spotlight_carousel\"]/div[3]").click();
+
+        secondElement.clear();
+
+        secondElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        assertThat(firstElement).isEqualTo(secondElement);
+
+        return this;
+    }
+
+    public SteamTest inspectCommunityRecommendation() {
+
+        List<ElementsCollection> firstElement = new ArrayList<>();
+        List<ElementsCollection> secondElement = new ArrayList<>();
+
+        communityRecomendation.scrollTo().shouldBe(visible);
+
+        firstElement.add(communityRecomendation.$$(".focus").first(1));
+
+        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[5]").click();
+
+        secondElement.add(communityRecomendation.$$(".focus").first(2));
+
+        assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
+
+        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[4]").click();
+
+        secondElement.clear();
+
+        secondElement.add(communityRecomendation.$$(".focus").first(1));
+
+        assertThat(secondElement).isEqualTo(firstElement);
+
+        return this;
+    }
 }

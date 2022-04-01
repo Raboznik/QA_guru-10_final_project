@@ -8,7 +8,14 @@ public class TestData extends TestBase {
     SteamTest steamTest = new SteamTest();
     @Test
     void test() {
-        steamTest.openMainPage().inspectMainPage().inspectNavigationMenu().inspectGutterBlock().inspectSpecialOffers();
-        //inspectMainContentBlock()
+        steamTest
+                .openMainPage()
+                .inspectMainPage()
+                .inspectNavigationMenu()
+                .inspectGutterBlock()
+                .inspectMainContentBlock()
+                .inspectSpecialOffers()
+                .inspectCommunityRecommendation();
+
     }
 }
