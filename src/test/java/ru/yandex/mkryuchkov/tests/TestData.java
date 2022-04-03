@@ -1,21 +1,26 @@
 package ru.yandex.mkryuchkov.tests;
 
+
 import org.junit.jupiter.api.Test;
 
 public class TestData extends TestBase {
 
-
     SteamTest steamTest = new SteamTest();
+
     @Test
-    void test() {
+    void steamMainPageTest() {
+
         steamTest
                 .openMainPage()
+                .inspectMainContentBlock()
                 .inspectMainPage()
                 .inspectNavigationMenu()
                 .inspectGutterBlock()
-                .inspectMainContentBlock()
                 .inspectSpecialOffers()
-                .inspectCommunityRecommendation();
+                .inspectCommunityRecommendation()
+                .inspectPopularContent()
+                .inspectPopularVrGames()
+                .inspectHomeTab();
 
     }
 }

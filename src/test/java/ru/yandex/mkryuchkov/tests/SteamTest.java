@@ -2,13 +2,17 @@ package ru.yandex.mkryuchkov.tests;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SteamTest extends TestBase {
@@ -28,7 +32,6 @@ public class SteamTest extends TestBase {
             updatesAndDiscount = $(".marketingmessage_container"),
             lowerLogin = $("#content_login"),
             footer = $("#footer");
-
 
 
     public SteamTest openMainPage() {
@@ -67,21 +70,31 @@ public class SteamTest extends TestBase {
         List<ElementsCollection> firstElement = new ArrayList<>();
         List<ElementsCollection> secondElement = new ArrayList<>();
 
-        firstElement.add($$(".store_main_capsule").filterBy(visible));
+//        firstElement.add($$(".store_main_capsule").filterBy(visible));
+//
+//        $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
+//
+//        secondElement.add($$(".store_main_capsule").filterBy(visible));
+//
+//        assertThat(firstElement).isNotEqualTo(secondElement);
+//        secondElement.clear();
+//
+//        $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
+//        sleep(100);
+//
+//        secondElement.add($$(".store_main_capsule").filterBy(visible));
+//
+//        assertThat(firstElement).isEqualTo(secondElement);
 
+        firstElement.add($$(".store_main_capsule").first(1));
         $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
-
-        secondElement.add($$(".store_main_capsule").filterBy(visible));
-
+        secondElement.add($$(".store_main_capsule").first(2));
         assertThat(firstElement).isNotEqualTo(secondElement);
         secondElement.clear();
-
         $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
-        sleep(100);
-
-        secondElement.add($$(".store_main_capsule").filterBy(visible));
-
+        secondElement.add($$(".store_main_capsule").first(1));
         assertThat(firstElement).isEqualTo(secondElement);
+
 
         return this;
     }
@@ -137,4 +150,68 @@ public class SteamTest extends TestBase {
 
         return this;
     }
+
+    public SteamTest inspectPopularContent() {
+//        popularSections.scrollTo().shouldBe(visible);
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[14]/div/div/a[1]").scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
+//        popularSections.$(".big_button").scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
+        return this;
+    }
+
+    public SteamTest inspectPopularVrGames() {
+        List<SelenideElement> firstElement = new ArrayList<>();
+        List<SelenideElement> secondElement = new ArrayList<>();
+
+        firstElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]"));
+
+        $x("//*[@id=\"responsive_page_template_content\"]" +
+                "/div[1]/div[2]/div[18]/div/div/div[4]").scrollTo().click();
+
+        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+                "/div[1]/div[2]/div[18]/div/div/div[1]/div[2]/a[1]/div[1]"));
+
+        assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
+
+        $x("//*[@id=\"responsive_page_template_content\"]" +
+                "/div[1]/div[2]/div[18]/div/div/div[3]").click();
+
+        secondElement.clear();
+
+        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]"));
+
+        assertThat(secondElement).isEqualTo(firstElement);
+
+        return this;
+    }
+
+    public SteamTest inspectHomeTab() {
+
+        List<ElementsCollection> firstElement = new ArrayList<>();
+
+        firstElement.add($$(".tab_item_cap").filterBy(visible));
+
+        for (int i = 0; i < firstElement.size(); i++) {
+            firstElement.remove(firstElement.get(i));
+
+        }
+
+//        for (ElementsCollection e: firstElement) {
+//            e.fhover();
+//
+//        }
+
+        for (ElementsCollection e: firstElement) {
+            System.out.println(e);
+
+        }
+
+
+
+
+
+        return this;
+    }
+
 }
