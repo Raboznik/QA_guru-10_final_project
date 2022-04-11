@@ -2,17 +2,13 @@ package ru.yandex.mkryuchkov.tests;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SteamTest extends TestBase {
@@ -152,64 +148,67 @@ public class SteamTest extends TestBase {
     }
 
     public SteamTest inspectPopularContent() {
+
 //        popularSections.scrollTo().shouldBe(visible);
-        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[14]/div/div/a[1]").scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[11]/div/div/a[1]").scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
 //        popularSections.$(".big_button").scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
         return this;
     }
 
     public SteamTest inspectPopularVrGames() {
-        List<SelenideElement> firstElement = new ArrayList<>();
-        List<SelenideElement> secondElement = new ArrayList<>();
 
-        firstElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
-                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]"));
+        //убрать скроллы
 
-        $x("//*[@id=\"responsive_page_template_content\"]" +
-                "/div[1]/div[2]/div[18]/div/div/div[4]").scrollTo().click();
-
-        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
-                "/div[1]/div[2]/div[18]/div/div/div[1]/div[2]/a[1]/div[1]"));
-
-        assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
-
-        $x("//*[@id=\"responsive_page_template_content\"]" +
-                "/div[1]/div[2]/div[18]/div/div/div[3]").click();
-
-        secondElement.clear();
-
-        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
-                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]"));
-
-        assertThat(secondElement).isEqualTo(firstElement);
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[18]/div/div").shouldBe(visible);
+//        List<SelenideElement> firstElement = new ArrayList<>();
+//        List<SelenideElement> secondElement = new ArrayList<>();
+//
+//        firstElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+//                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]").scrollTo());
+//
+//        $x("//*[@id=\"responsive_page_template_content\"]" +
+//                "/div[1]/div[2]/div[18]/div/div/div[4]").scrollTo().click();
+//
+//        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+//                "/div[1]/div[2]/div[18]/div/div/div[1]/div[2]/a[1]/div[1]").scrollTo());
+//
+//        assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
+//
+//        $x("//*[@id=\"responsive_page_template_content\"]" +
+//                "/div[1]/div[2]/div[18]/div/div/div[3]").scrollTo().click();
+//
+//        secondElement.clear();
+//
+//        secondElement.add($x("//*[@id=\"responsive_page_template_content\"]" +
+//                "/div[1]/div[2]/div[18]/div/div/div[1]/div[1]/a[1]/div[1]").scrollTo());
+//
+//        assertThat(secondElement).isEqualTo(firstElement);
 
         return this;
     }
 
     public SteamTest inspectHomeTab() {
 
-        List<ElementsCollection> firstElement = new ArrayList<>();
+        $("#delayedimage_home_tabs_autoload_0").scrollTo();
 
-        firstElement.add($$(".tab_item_cap").filterBy(visible));
-
-        for (int i = 0; i < firstElement.size(); i++) {
-            firstElement.remove(firstElement.get(i));
-
+        for (int j = 0; j < 10; j++) {
+            $("#delayedimage_home_tabs_autoload_" + j).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
         }
 
-//        for (ElementsCollection e: firstElement) {
-//            e.fhover();
-//
-//        }
+        $("#tab_topsellers_content_trigger").click();
 
-        for (ElementsCollection e: firstElement) {
-            System.out.println(e);
-
+        for (int j = 0; j < 10; j++) {
+            $("#delayedimage_home_tabs_" + j).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
         }
 
+        $("#tab_upcoming_content_trigger").click();
 
-
-
+        for (int j = 0; j < 10; j++) {
+            $("#delayedimage_home_tabs_3" + j).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
+        }
 
         return this;
     }
