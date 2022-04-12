@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class TestBase {
 
-    protected String baseUrl = "https://store.steampowered.com/";
+    protected String baseUrl = "https://github.com/Raboznik/QA_guru-10_final_project";
 
 
     @BeforeAll
