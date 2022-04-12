@@ -39,7 +39,7 @@ public class SteamTest extends TestBase {
         header.$(".supernav_container").find(".menuitem", 0).shouldHave(href(baseUrl + "?snr=1_4_4__global-header"));
         header.$(".supernav_container").find(".menuitem", 1).shouldHave(href("https://steamcommunity.com/"));
         header.$(".supernav_container").find(".menuitem", 2).shouldHave(href(baseUrl + "about/?snr=1_4_4__global-header"));
-        header.$(".supernav_container").find(".menuitem", 3).shouldHave(href("https://help.steampowered.com/ru/"));
+        header.$(".supernav_container").find(".menuitem", 3).shouldHave(href("https://help.steampowered.com/en/"));
 
         return this;
     }
@@ -49,14 +49,14 @@ public class SteamTest extends TestBase {
 
         storeNavigation.shouldBe(visible);
 
-        storeNavigation.$("#store_nav_search_term").shouldBe(visible); //проверяю строку поиска
+        storeNavigation.$("#store_nav_search_term").shouldBe(visible);
 
         return this;
     }
 
     public SteamTest inspectGutterBlock() {
 
-        homePageGutter.shouldBe(visible).$$(".home_page_gutter_block").shouldHave(size(4)); //проверяю, что блоков слева 4
+        homePageGutter.shouldBe(visible).$$(".home_page_gutter_block").shouldHave(size(4));
 
         return this;
     }

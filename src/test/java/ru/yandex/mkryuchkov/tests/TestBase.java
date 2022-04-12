@@ -17,15 +17,13 @@ import static com.codeborne.selenide.Selenide.sleep;
 public class TestBase {
 
     protected String baseUrl = "https://store.steampowered.com/";
-
+    static CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void setUp() {
 
-        CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
         String browser = System.getProperty("browser", "chrome");
-//        String version = System.getProperty("version", "91");
         String size = System.getProperty("size", "1920x1080");
 
         String remoteUrl = System.getProperty("remoteUrl", cfgs.remoteUrl());

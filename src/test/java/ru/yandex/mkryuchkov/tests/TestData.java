@@ -1,6 +1,7 @@
 package ru.yandex.mkryuchkov.tests;
 
 
+import com.codeborne.selenide.Credentials;
 import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class TestData extends TestBase {
-
-    CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
     SteamTest steamTest = new SteamTest();
 
@@ -74,6 +73,7 @@ public class TestData extends TestBase {
 
         step("Type login", () -> {
             $("#input_username").click();
+            $("#input_username").setValue(cfgs.login());
             $("#input_username").setValue(cfgs.login());
         });
 
