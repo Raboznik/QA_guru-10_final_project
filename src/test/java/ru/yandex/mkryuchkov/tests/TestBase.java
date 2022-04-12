@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class TestBase {
 
-    protected String baseUrl = "https://github.com/Raboznik/QA_guru-10_final_project";
+    protected String baseUrl = "https://store.steampowered.com/";
 
 
     @BeforeAll
@@ -28,14 +28,12 @@ public class TestBase {
 //        String version = System.getProperty("version", "91");
         String size = System.getProperty("size", "1920x1080");
 
-        String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud/wd/hub");
+        String remoteUrl = System.getProperty("remoteUrl", cfgs.remoteUrl());
         String login = System.getProperty("login", cfgs.remoteLogin());
         String pass = System.getProperty("pass", cfgs.remotePassword());
 
-//        Configuration.remote = "https://" + login + ":" + pass + "@" + remoteUrl;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://" + login + ":" + pass + "@" + remoteUrl;
         Configuration.browser = browser;
-//        Configuration.browserVersion = version;
         Configuration.browserSize = size;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -46,8 +44,7 @@ public class TestBase {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         Attach.attachAsText("Browser: ", browser);
-//        Attach.attachAsText("Version: ", version);
-        Attach.attachAsText("Remote Url: ", "selenoid.autotests.cloud/wd/hub");
+        Attach.attachAsText("Remote Url: ", cfgs.remoteUrl());
 
     }
 
