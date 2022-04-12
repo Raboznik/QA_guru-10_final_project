@@ -2,7 +2,7 @@ package ru.yandex.mkryuchkov.config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:credentials.properties")
+@Config.Sources("classpath:steam.properties")
 public interface CredentialsConfig extends Config {
 
     @Key("user")
@@ -10,4 +10,15 @@ public interface CredentialsConfig extends Config {
 
     @Key("password")
     String password();
+
+    @Key("remote.login")
+    String remoteLogin();
+
+    @Key("remote.password")
+    String remotePassword();
+
+    @Key("remote.url")
+    String remoteUrl();
+
+
 }
