@@ -32,7 +32,8 @@ public class TestBase {
         String login = System.getProperty("login", cfgs.remoteLogin());
         String pass = System.getProperty("pass", cfgs.remotePassword());
 
-        Configuration.remote = "https://" + login + ":" + pass + "@" + remoteUrl;
+//        Configuration.remote = "https://" + login + ":" + pass + "@" + remoteUrl;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browser = browser;
         Configuration.browserVersion = version;
         Configuration.browserSize = size;
