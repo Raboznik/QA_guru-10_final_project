@@ -2,8 +2,9 @@ package ru.yandex.mkryuchkov.tests;
 
 
 import io.qameta.allure.Step;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
-import ru.yandex.mkryuchkov.config.Credentials;
+
 import ru.yandex.mkryuchkov.config.CredentialsConfig;
 
 import static com.codeborne.selenide.Condition.*;
@@ -12,6 +13,8 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class TestData extends TestBase {
+
+    CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
     SteamTest steamTest = new SteamTest();
 
@@ -71,12 +74,12 @@ public class TestData extends TestBase {
 
         step("Type login", () -> {
             $("#input_username").click();
-            $("#input_username").setValue(Credentials.cfgs.login());
+            $("#input_username").setValue(cfgs.login());
         });
 
         step("Type password", () -> {
             $("#input_password").click();
-            $("#input_password").setValue(Credentials.cfgs.password());
+            $("#input_password").setValue(cfgs.password());
         });
 
         step("Click login", () -> {
@@ -84,7 +87,7 @@ public class TestData extends TestBase {
         });
 
         step("Verify login", () -> {
-            $("#account_pulldown").shouldHave(text(Credentials.cfgs.login()));
+            $("#account_pulldown").shouldHave(text(cfgs.login()));
         });
     }
 
@@ -100,7 +103,7 @@ public class TestData extends TestBase {
         step("Create chat with user name", () -> {
                     $(".createChatRoomButton").click();
                     $(".nicknameInput").click();
-                    $(".nicknameInput").setValue(Credentials.cfgs.login());
+                    $(".nicknameInput").setValue(cfgs.login());
                     $(".Primary").click();
                 });
 

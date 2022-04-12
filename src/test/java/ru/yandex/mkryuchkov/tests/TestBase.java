@@ -12,7 +12,7 @@ import ru.yandex.mkryuchkov.helper.Attach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.sleep;
-import static ru.yandex.mkryuchkov.config.Credentials.cfgs;
+
 
 public class TestBase {
 
@@ -22,7 +22,7 @@ public class TestBase {
     @BeforeAll
     static void setUp() {
 
-//        CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
+        CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
         String browser = System.getProperty("browser", "chrome");
         String version = System.getProperty("version", "91");
