@@ -28,7 +28,7 @@ public class TestBase {
         String version = System.getProperty("version", "91");
         String size = System.getProperty("size", "1920x1080");
 
-        String remoteUrl = System.getProperty("remoteUrl", cfgs.remoteUrl());
+        String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud/wd/hub");
         String login = System.getProperty("login", cfgs.remoteLogin());
         String pass = System.getProperty("pass", cfgs.remotePassword());
 
