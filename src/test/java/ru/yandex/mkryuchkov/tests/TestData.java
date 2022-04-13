@@ -176,7 +176,10 @@ public class TestData extends TestBase {
 
         $("#delayedimage_home_tabs_autoload_2").scrollTo();
 
-        for (int i = 2; i < 11; i++) {
+        for (int i = 0; i < 11; i++) {
+            if (!$("#delayedimage_home_tabs_autoload_" + i).exists()) {
+                i++;
+            }
             $("#delayedimage_home_tabs_autoload_" + i).shouldBe(visible).hover();
             preview.shouldBe(visible);
         }
