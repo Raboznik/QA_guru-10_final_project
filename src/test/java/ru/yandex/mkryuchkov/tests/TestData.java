@@ -174,9 +174,9 @@ public class TestData extends TestBase {
     @Step("Inspect home tab content block")
     public TestData inspectHomeTab() {
 
-        $("#delayedimage_home_tabs_autoload_1").scrollTo();
+        $("#delayedimage_home_tabs_autoload_2").scrollTo();
 
-        for (int i = 1; i < 11; i++) {
+        for (int i = 2; i < 11; i++) {
             $("#delayedimage_home_tabs_autoload_" + i).shouldBe(visible).hover();
             preview.shouldBe(visible);
         }
