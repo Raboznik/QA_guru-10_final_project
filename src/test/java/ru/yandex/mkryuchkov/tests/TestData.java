@@ -180,7 +180,7 @@ public class TestData extends TestBase {
         $("#tab_newreleases_content").scrollTo();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_newreleases_content").find(".app_impression_tracked", i).shouldBe(visible));
+            list.add($("#tab_newreleases_content").find(".tab_item", i).shouldBe(visible));
         }
 
         for (SelenideElement e : list) {
@@ -195,7 +195,7 @@ public class TestData extends TestBase {
         list.clear();
 
         for (int i = 0; i < 9; i++) {
-            list.add($("#tab_topsellers_content").find(".app_impression_tracked", i).shouldBe(visible));
+            list.add($("#tab_topsellers_content").find(".tab_item", i).shouldBe(visible));
         }
 
         for (SelenideElement e : list) {
@@ -210,7 +210,7 @@ public class TestData extends TestBase {
         $("#tab_upcoming_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_upcoming_content").find(".app_impression_tracked", i).shouldBe(visible));
+            list.add($("#tab_upcoming_content").find(".tab_item", i).shouldBe(visible));
         }
 
         for (SelenideElement e : list) {
@@ -225,7 +225,7 @@ public class TestData extends TestBase {
         list.clear();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_specials_content").find(".app_impression_tracked", i).shouldBe(visible));
+            list.add($("#tab_specials_content").find(".tab_item", i).shouldBe(visible));
         }
 
         for (SelenideElement e : list) {
