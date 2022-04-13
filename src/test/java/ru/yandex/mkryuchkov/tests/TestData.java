@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.href;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -161,12 +162,12 @@ public class TestData extends TestBase {
 
         popularVrGames.$(".carousel_items").scrollTo().shouldBe(visible);
 
-        if (popularVrGames.$(".arrow", 1).exists()) {
-            popularVrGames.$(".arrow", 1).click();
-            popularVrGames.$(".carousel_items").shouldBe(visible);
-            popularVrGames.$(".arrow", 0).click();
-            popularVrGames.$(".carousel_items").shouldBe(visible);
-        }
+//        if (popularVrGames.$(".arrow", 0).exists()) {
+//            popularVrGames.$(".arrow", 1).click();
+//            popularVrGames.$(".carousel_items").shouldBe(visible);
+//            popularVrGames.$(".arrow", 0).click();
+//            popularVrGames.$(".carousel_items").shouldBe(visible);
+//        }
 
         return this;
     }
@@ -174,33 +175,65 @@ public class TestData extends TestBase {
     @Step("Inspect home tab content block")
     public TestData inspectHomeTab() {
 
-        $("#delayedimage_home_tabs_autoload_2").scrollTo();
+        List<SelenideElement> list = new ArrayList<>();
 
-        for (int i = 0; i < 11; i++) {
-            if (!$("#delayedimage_home_tabs_autoload_" + i).exists()) {
-                i++;
-            }
-            $("#delayedimage_home_tabs_autoload_" + i).shouldBe(visible).hover();
+        $("#tab_newreleases_content").scrollTo();
+
+        for (int i = 0; i < 10; i++) {
+            list.add($("#tab_newreleases_content").find(".app_impression_tracked", i).shouldBe(visible));
+        }
+
+        for (SelenideElement e : list) {
+
+            e.shouldBe(visible).hover();
+
             preview.shouldBe(visible);
         }
 
         $("#tab_topsellers_content_trigger").click();
 
-        for (int i = 0; i < 10; i++) {
-            if (!$("#delayedimage_home_tabs_" + i).exists()) {
-                i++;
-            }
-            $("#delayedimage_home_tabs_" + i).shouldBe(visible).hover();
+        list.clear();
+
+        for (int i = 0; i < 9; i++) {
+            list.add($("#tab_topsellers_content").find(".app_impression_tracked", i).shouldBe(visible));
+        }
+
+        for (SelenideElement e : list) {
+
+            e.shouldBe(visible).hover();
+
             preview.shouldBe(visible);
         }
+
+        list.clear();
 
         $("#tab_upcoming_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
-            $("#delayedimage_home_tabs_3" + i).shouldBe(visible).hover();
+            list.add($("#tab_upcoming_content").find(".app_impression_tracked", i).shouldBe(visible));
+        }
+
+        for (SelenideElement e : list) {
+
+            e.shouldBe(visible).hover();
+
             preview.shouldBe(visible);
         }
 
+        $("#tab_specials_content_trigger").click();
+
+        list.clear();
+
+        for (int i = 0; i < 10; i++) {
+            list.add($("#tab_specials_content").find(".app_impression_tracked", i).shouldBe(visible));
+        }
+
+        for (SelenideElement e : list) {
+
+            e.shouldBe(visible).hover();
+
+            preview.shouldBe(visible);
+        }
         return this;
     }
 
