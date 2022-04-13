@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class TestBase {
 
-    protected String baseUrl = "https://store.steampowered.com/";
+    String baseUrl = "https://store.steampowered.com/";
     static CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll

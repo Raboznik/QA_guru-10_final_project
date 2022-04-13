@@ -1,125 +1,245 @@
 package ru.yandex.mkryuchkov.tests;
 
-
-import com.codeborne.selenide.Credentials;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.Test;
 
-import ru.yandex.mkryuchkov.config.CredentialsConfig;
+import java.util.ArrayList;
+import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static io.qameta.allure.Allure.step;
+import static com.codeborne.selenide.Selenide.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestData extends TestBase {
 
-    SteamTest steamTest = new SteamTest();
+    private SelenideElement
+            header = $("#global_header"),
+            storeNavigation = $("#store_nav_area"),
+            homePageGutter = $(".home_page_gutter"),
+            spotlightCarousel = $("#spotlight_carousel"),
+            communityRecomendation = $("#module_community_recommendations"),
+            liveStream = $("#live_streams_carousel"),
+            upTo300rub = $(".specials_under10_content"),
+            lowerLogin = $("#content_login"),
+            footer = $("#footer_text");
 
-    @Step("Smoke test of Steam main page")
-    @Test
-    void steamMainPageTest() {
-
-        steamTest
-                .openMainPage()
-                .inspectMainContentBlock()
-                .inspectMainPage()
-                .inspectNavigationMenu()
-                .inspectGutterBlock()
-                .inspectSpecialOffers()
-                .inspectCommunityRecommendation()
-                .inspectPopularContent()
-                .inspectPopularVrGames()
-                .inspectHomeTab()
-                .inspectLiveStreamTab()
-                .inspectUpTo300RubTab()
-                .inspectLowerLogin()
-                .inspectFooter();
-
+    @Step("Open main page")
+    public TestData openMainPage() {
+        open(baseUrl);
+        return this;
     }
 
-    @Test
-    void searchGameTest() {
+    @Step("Inspect Header")
+    public TestData inspectMainPage() {
 
-        step("Open main page", () -> {
-            open(baseUrl);
-        });
+        header.shouldBe(visible);
 
-        step("Click on search bar", () -> {
-            $("#store_nav_search_term").click();
-        });
+        header.$(".supernav_container").find(".menuitem", 0).shouldHave(href(baseUrl + "?snr=1_4_4__global-header"));
+        header.$(".supernav_container").find(".menuitem", 1).shouldHave(href("https://steamcommunity.com/"));
+        header.$(".supernav_container").find(".menuitem", 2).shouldHave(href(baseUrl + "about/?snr=1_4_4__global-header"));
+        header.$(".supernav_container").find(".menuitem", 3).shouldHave(href("https://help.steampowered.com/en/"));
 
-        step("Type searched game", () -> {
-            $("#store_nav_search_term").setValue("Dota 2").pressEnter();
-        });
-
-        step("Inspect search result list", () -> {
-            $("#search_resultsRows").shouldBe(visible).$("a")
-                    .shouldHave(href("https://store.steampowered.com/app/570/Dota_2/?snr=1_7_7_151_150_1"));
-        });
+        return this;
     }
 
-    @Test
-    void loginTest() {
+    @Step("Inspect search bar")
+    public TestData inspectNavigationMenu() {
 
-        step("Open main page", () -> {
-            open(baseUrl);
-        });
+        storeNavigation.shouldBe(visible);
 
-        step("Open login page", () -> {
-            $("#global_action_menu").$(".global_action_link").click();
-        });
+        storeNavigation.$("#store_nav_search_term").shouldBe(visible);
 
-        step("Type login", () -> {
-            $("#input_username").click();
-            $("#input_username").setValue(cfgs.login());
-            $("#input_username").setValue(cfgs.login());
-        });
-
-        step("Type password", () -> {
-            $("#input_password").click();
-            $("#input_password").setValue(cfgs.password());
-        });
-
-        step("Click login", () -> {
-            $("#login_btn_signin").$(".login_btn").click();
-        });
-
-        step("Verify login", () -> {
-            $("#account_pulldown").shouldHave(text(cfgs.login()));
-        });
+        return this;
     }
 
-    @Test
-    void steamChatTest() {
+    @Step("Inspect blocks on the left side")
+    public TestData inspectGutterBlock() {
 
-        step("Login in Steam", this::loginTest);
+        homePageGutter.shouldBe(visible).$$(".home_page_gutter_block").shouldHave(size(4));
 
-        step("Press chat button", () -> {
-                    $("#global_header").$(".supernav_container").$(".menuitem", 3).click();
-                });
+        return this;
+    }
 
-        step("Create chat with user name", () -> {
-                    $(".createChatRoomButton").click();
-                    $(".nicknameInput").click();
-                    $(".nicknameInput").setValue(cfgs.login());
-                    $(".Primary").click();
-                });
+    @Step("Inspect main content block")
+    public TestData inspectMainContentBlock() {
 
-        step("Type а phrase into the chat window", () -> {
-                    $(".chatentry_chatTextarea_3e__5").click();
-                    $(".chatentry_chatTextarea_3e__5").setValue("Hello World!").pressEnter();
-                });
+        List<ElementsCollection> firstElement = new ArrayList<>();
+        List<ElementsCollection> secondElement = new ArrayList<>();
 
-        step("check the phrase in the chat history", () -> {
-                    $(".chatHistoryScroll").$(".LastMessageBlock").$(".messages_MsgWithAddons_lFLbk").$(".msgText").shouldHave(text("Hello World!"));
-                });
+        firstElement.add($$(".store_main_capsule").first(1));
 
-        step("Delete chat", () -> {
-            $(".SVGIcon_ChatSettings").click();
-            $(".chatroomgroupsettings_LeaveButton_3OGY7").click();
-            $(".Primary").click();
-        });
+        $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
+
+        secondElement.add($$(".store_main_capsule").first(2));
+
+        assertThat(firstElement).isNotEqualTo(secondElement);
+
+        secondElement.clear();
+
+        $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
+
+        secondElement.add($$(".store_main_capsule").first(1));
+
+        assertThat(firstElement).isEqualTo(secondElement);
+
+        return this;
+    }
+
+    @Step("Inspect special offers")
+    public TestData inspectSpecialOffers() {
+
+        List<ElementsCollection> firstElement = new ArrayList<>();
+        List<ElementsCollection> secondElement = new ArrayList<>();
+
+        spotlightCarousel.scrollTo();
+
+        firstElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        $x("//*[@id=\"spotlight_carousel\"]/div[4]").scrollTo().click();
+
+        secondElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        assertThat(firstElement).isNotEqualTo(secondElement.get(0));       // get0?
+
+        $x("//*[@id=\"spotlight_carousel\"]/div[3]").click();
+
+        secondElement.clear();
+
+        secondElement.add(spotlightCarousel.$$(".home_special_offers_group"));
+
+        assertThat(firstElement).isEqualTo(secondElement);
+
+        return this;
+    }
+
+    @Step("Inspect community recommendation")
+    public TestData inspectCommunityRecommendation() {
+
+        List<ElementsCollection> firstElement = new ArrayList<>();
+        List<ElementsCollection> secondElement = new ArrayList<>();
+
+        communityRecomendation.scrollTo().shouldBe(visible);
+
+        firstElement.add(communityRecomendation.$$(".focus").first(1));
+
+        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[5]").click();
+
+        secondElement.add(communityRecomendation.$$(".focus").first(2));
+
+        assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
+
+        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[4]").click();
+
+        secondElement.clear();
+
+        secondElement.add(communityRecomendation.$$(".focus").first(1));
+
+        assertThat(secondElement).isEqualTo(firstElement);
+
+        return this;
+    }
+
+    @Step("Inspect popular content block")
+    public TestData inspectPopularContent() {
+
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[11]/div/div/a[1]")
+                .scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
+
+        return this;
+    }
+
+    @Step("Inspect popular VR games")
+    public TestData inspectPopularVrGames() {
+
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[18]/div/div").shouldBe(visible);
+
+        return this;
+    }
+
+    @Step("Inspect home tab content block")
+    public TestData inspectHomeTab() {
+
+        $("#delayedimage_home_tabs_autoload_0").scrollTo();
+
+        for (int i = 0; i < 10; i++) {
+            $("#delayedimage_home_tabs_autoload_" + i).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
+        }
+
+        $("#tab_topsellers_content_trigger").click();
+
+        for (int i = 0; i < 10; i++) {
+            $("#delayedimage_home_tabs_" + i).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
+        }
+
+        $("#tab_upcoming_content_trigger").click();
+
+        for (int i = 0; i < 10; i++) {
+            $("#delayedimage_home_tabs_3" + i).shouldBe(visible).hover();
+            $("#tab_preview_container").shouldBe(visible);
+        }
+
+        return this;
+    }
+
+    @Step("Inspect live stream block")
+    public TestData inspectLiveStreamTab() {
+
+        liveStream.scrollTo().shouldBe(visible);
+
+        return this;
+    }
+
+    @Step("Inspect cheap games tab")
+    public TestData inspectCheapGamesTab() {
+
+        upTo300rub.scrollTo().shouldBe(visible);
+
+        List<ElementsCollection> firstElement = new ArrayList<>();
+
+        List<ElementsCollection> secondElement = new ArrayList<>();
+
+        firstElement.add(upTo300rub.$$(".focus").first(1));
+
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[20]/div/div/div[4]").click();
+
+        secondElement.add(upTo300rub.$$(".focus").first(2));
+
+        assertThat(firstElement).isNotEqualTo(secondElement);
+
+        secondElement.clear();
+
+        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[20]/div/div/div[3]").click();
+
+        secondElement.add(upTo300rub.$$(".focus").first(1));
+
+        assertThat(firstElement).isEqualTo(secondElement);
+
+        return this;
+    }
+
+    @Step("Inspect Lower Login")
+    public TestData inspectLowerLogin() {
+
+        lowerLogin.scrollTo().shouldBe(visible)
+                .$(".btn_green_white_innerfade").shouldHave(href(baseUrl + "login/?snr=1_4_4__more-content-login"));
+
+        return this;
+    }
+
+    @Step("Inspect footer links")
+    public TestData inspectFooter() {
+
+        footer.scrollTo().shouldBe(visible);
+        footer.find("div", 1).find("a", 0).shouldHave(href(baseUrl + "privacy_agreement/?snr=1_44_44_"));
+        footer.find("div", 1).find("a", 1).shouldHave(href(baseUrl + "legal/?snr=1_44_44_"));
+        footer.find("div", 1).find("a", 2).shouldHave(href(baseUrl + "subscriber_agreement/?snr=1_44_44_"));
+        footer.find("div", 1).find("a", 3).shouldHave(href(baseUrl + "steam_refunds/?snr=1_44_44_"));
+        footer.find("div", 1).find("a", 4).shouldHave(href(baseUrl + "account/cookiepreferences/?snr=1_44_44_"));
+
+        return this;
     }
 }
