@@ -187,6 +187,9 @@ public class TestData extends TestBase {
         $("#tab_topsellers_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
+            if (!$("#delayedimage_home_tabs_" + i).exists()) {
+                i++;
+            }
             $("#delayedimage_home_tabs_" + i).shouldBe(visible).hover();
             preview.shouldBe(visible);
         }
