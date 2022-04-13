@@ -18,8 +18,12 @@ public class TestData extends TestBase {
             header = $("#global_header"),
             storeNavigation = $("#store_nav_area"),
             homePageGutter = $(".home_page_gutter"),
+            popular = $("#home_maincap_v7"),
             spotlightCarousel = $("#spotlight_carousel"),
             communityRecomendation = $("#module_community_recommendations"),
+            popularContent = $(".big_buttons").$(".button_container"),
+            popularVrGames = $(".best_selling_vr_ctn").$(".home_page_content").$(".paging_capsules"),
+            preview = $("#tab_preview_container"),
             liveStream = $("#live_streams_carousel"),
             upTo300rub = $(".specials_under10_content"),
             lowerLogin = $("#content_login"),
@@ -70,7 +74,7 @@ public class TestData extends TestBase {
 
         firstElement.add($$(".store_main_capsule").first(1));
 
-        $x("//*[@id=\"home_maincap_v7\"]/div[4]").click();
+        popular.lastChild().click();
 
         secondElement.add($$(".store_main_capsule").first(2));
 
@@ -78,7 +82,7 @@ public class TestData extends TestBase {
 
         secondElement.clear();
 
-        $x("//*[@id=\"home_maincap_v7\"]/div[3]").click();
+        popular.$(".arrow", 0).click();
 
         secondElement.add($$(".store_main_capsule").first(1));
 
@@ -97,13 +101,13 @@ public class TestData extends TestBase {
 
         firstElement.add(spotlightCarousel.$$(".home_special_offers_group"));
 
-        $x("//*[@id=\"spotlight_carousel\"]/div[4]").scrollTo().click();
+        spotlightCarousel.lastChild().scrollTo().click();
 
         secondElement.add(spotlightCarousel.$$(".home_special_offers_group"));
 
-        assertThat(firstElement).isNotEqualTo(secondElement.get(0));       // get0?
+        assertThat(firstElement).isNotEqualTo(secondElement.get(0));
 
-        $x("//*[@id=\"spotlight_carousel\"]/div[3]").click();
+        spotlightCarousel.$(".arrow", 0).click();
 
         secondElement.clear();
 
@@ -124,13 +128,13 @@ public class TestData extends TestBase {
 
         firstElement.add(communityRecomendation.$$(".focus").first(1));
 
-        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[5]").click();
+        communityRecomendation.$(".home_page_content").$(".arrow", 1).click();
 
         secondElement.add(communityRecomendation.$$(".focus").first(2));
 
         assertThat(secondElement.get(0)).isNotEqualTo(firstElement);
 
-        $x("//*[@id=\"module_community_recommendations\"]/div/div/div[4]").click();
+        communityRecomendation.$(".home_page_content").$(".arrow", 0).click();
 
         secondElement.clear();
 
@@ -144,8 +148,10 @@ public class TestData extends TestBase {
     @Step("Inspect popular content block")
     public TestData inspectPopularContent() {
 
-        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[11]/div/div/a[1]")
-                .scrollTo().shouldHave(text("Новинки")).shouldBe(visible);
+        popularContent.$(".big_button", 0).shouldHave(href(baseUrl + "explore/new/?snr=1_4_4__146"));
+        popularContent.$(".big_button", 1).shouldHave(href(baseUrl + "search/?specials=1&snr=1_4_4__146"));
+        popularContent.$(".big_button", 2).shouldHave(href(baseUrl + "genre/Free to Play/?snr=1_4_4__146"));
+        popularContent.$(".big_button", 3).shouldHave(href(baseUrl + "tag/browse/?snr=1_4_4__146"));
 
         return this;
     }
@@ -153,7 +159,14 @@ public class TestData extends TestBase {
     @Step("Inspect popular VR games")
     public TestData inspectPopularVrGames() {
 
-        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[18]/div/div").shouldBe(visible);
+        popularVrGames.$(".carousel_items").scrollTo().shouldBe(visible);
+
+        if (popularVrGames.$(".arrow", 1).exists()) {
+            popularVrGames.$(".arrow", 1).click();
+            popularVrGames.$(".carousel_items").shouldBe(visible);
+            popularVrGames.$(".arrow", 0).click();
+            popularVrGames.$(".carousel_items").shouldBe(visible);
+        }
 
         return this;
     }
@@ -161,25 +174,25 @@ public class TestData extends TestBase {
     @Step("Inspect home tab content block")
     public TestData inspectHomeTab() {
 
-        $("#delayedimage_home_tabs_autoload_0").scrollTo();
+        $("#delayedimage_home_tabs_autoload_1").scrollTo();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             $("#delayedimage_home_tabs_autoload_" + i).shouldBe(visible).hover();
-            $("#tab_preview_container").shouldBe(visible);
+            preview.shouldBe(visible);
         }
 
         $("#tab_topsellers_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
             $("#delayedimage_home_tabs_" + i).shouldBe(visible).hover();
-            $("#tab_preview_container").shouldBe(visible);
+            preview.shouldBe(visible);
         }
 
         $("#tab_upcoming_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
             $("#delayedimage_home_tabs_3" + i).shouldBe(visible).hover();
-            $("#tab_preview_container").shouldBe(visible);
+            preview.shouldBe(visible);
         }
 
         return this;
@@ -188,7 +201,7 @@ public class TestData extends TestBase {
     @Step("Inspect live stream block")
     public TestData inspectLiveStreamTab() {
 
-        liveStream.scrollTo().shouldBe(visible);
+        liveStream.$(".carousel_items").$(".focus").scrollTo().shouldBe(visible);
 
         return this;
     }
@@ -204,7 +217,7 @@ public class TestData extends TestBase {
 
         firstElement.add(upTo300rub.$$(".focus").first(1));
 
-        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[20]/div/div/div[4]").click();
+        $(upTo300rub).$(".specials_under10").lastChild().click();
 
         secondElement.add(upTo300rub.$$(".focus").first(2));
 
@@ -212,7 +225,7 @@ public class TestData extends TestBase {
 
         secondElement.clear();
 
-        $x("//*[@id=\"responsive_page_template_content\"]/div[1]/div[2]/div[20]/div/div/div[3]").click();
+        $(upTo300rub).$(".specials_under10").$(".arrow", 0).click();
 
         secondElement.add(upTo300rub.$$(".focus").first(1));
 
