@@ -80,11 +80,10 @@ Smoke тест заглавной страницы магазина. Цель э
 
 
 ## <img src="src/img/icons/Jenkins.png" width="40" height="40"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
-<p align="center">
-<a href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"><img src="src/img/jenkins main.png" alt="Jenkins"/></a>
-</p>
 
-<img src="src/img/jenkins param.png" alt="Jenkins"/>
+![Jenkins](src/img/jenkinsMain.png)
+
+![Jenkins](src/img/jenkinsParam.png)
 
 
 
