@@ -1,17 +1,17 @@
-# Автотесты для сайта <a target="_blank" href="https://store.steampowered.com/">Steam</a>!
-<img src="src/test/img/icons/Steam.jpg" width="400" height="300"  alt="Steam"/>
+# Автотесты для сайта <a target="_blank" href="https://store.steampowered.com/">Steam</a>! 
+<img src="src/img/icons/Steam_2016_logo_black.svg.png" width="600" height="200"  alt="Steam"/>
 
 
 ## Почему Steam?  
 
-- Во-первых он известный
-- Во-вторых на нем много интерактивных деталей на которые можно потыкать
-- В-третьих он выдержан в темном стиле, а черное все делает крутым, да? 😎
+- Во-первых, он известный
+- Во-вторых, на нем много интерактивных деталей на которые можно потыкать
+- В-третьих, он выдержан в темном стиле, а черное все делает крутым, да? 😎
 
 
 ## ✔️ Реализованы четыре теста для сайта :
 
-#### - 1️ **steamMainPageTest()** 
+#### - 1️⃣ **steamMainPageTest()** 
 
 Smoke тест заглавной страницы магазина. Цель этого кейса убедиться, что основные элементы на главной странице магазина присутсвуют и выполняют бизнесс логику. Выполнен тест с помощью Page Object. ~~Все ведь любят PO?~~
 
@@ -21,13 +21,13 @@ Smoke тест заглавной страницы магазина. Цель э
 
 ✓ На баннерах с предложениями должны работать стрелки переключения. При этом нужно убедиться, что игры в баннерах действительно меняются при нажатии на стрелку
 
-✓ В цикле проверяются четыре вкладки с предложениями. При наведении на них мыши всплывает окно с соответствующей игрой. 
+✓ В цикле проверяются четыре вкладки с предложениями. При наведении на них мыши всплывает окно с соответствующей игрой 
 
 #### Пример прохождения теста : 
-![video](src/test/img/gif)
+![video](src/img/gif.gif)
 
 
-#### - 2️ **searchGameTest()**
+#### - 2️⃣ **searchGameTest()**
 
 Проверка окна поиска игры. На примере Dota 2 убеждаемся, что строка поика игр работает. Дотка на месте? За Стим можно не беспокоиться!
 
@@ -36,10 +36,10 @@ Smoke тест заглавной страницы магазина. Цель э
 ✓ Href ведет именно на Dota 2
 
 #### Пример прохождения теста : 
-![video](src/test/img/gif)
+![video](src/img/gif.dota2.gif)
 
 
-#### - 3️ **loginTest()**
+#### - 3️⃣ **loginTest()**
 
 Еще один критичный сценарий - пользователь сайта должен иметь возможность залогиниться, иначе зачем все это?
 
@@ -51,12 +51,12 @@ Smoke тест заглавной страницы магазина. Цель э
 
 
 #### Пример прохождения теста : 
-![video](src/test/img/gif)
+![video](src/img/gif.login.gif)
 
 
-#### - 4️ **steamChatTest()**
+#### - 4️⃣ **steamChatTest()**
 
-Проверяем функционал чата внутри Стима. Можно передать любую фразу в переменную *chatPhrase* и убедиться, что именно она появится в отправленных сообщениях. Если у тебя совсем нет друзей, то так можно коротать вечера. Поверь мне 🥲
+Проверяем функционал чата внутри Стима. Можно передать любую фразу в переменную *chatPhrase* и убедиться, что именно она появится в отправленных сообщениях. Если у тебя совсем нет друзей, то так можно коротать вечера. Поверь мне 😢
 
 ✓ Логинимся на сайте магазина
 
@@ -69,7 +69,7 @@ Smoke тест заглавной страницы магазина. Цель э
 ✓ Удаляем чат
 
 #### Пример прохождения теста : 
-![video](src/test/img/gif)
+![video](src/img/gif.chat.gif)
 
 
 
@@ -79,13 +79,12 @@ Smoke тест заглавной страницы магазина. Цель э
 ![Java](src/img/icons/Java.png)![Gradle](src/img/icons/Gradle.png)![JUnit5](src/img/icons/JUnit5.png)![Intelij_IDEA](src/img/icons/Intelij_IDEA.png)![Selenoid](src/img/icons/Selenoid.png)![Selenide](src/img/icons/Selenide.png)![Allure Report](src/img/icons/Allure_Report.png)![Github](src/img/icons/Github.png)![Jenkins](src/img/icons/Jenkins.png)![Telegram](src/img/icons/Telegram.png)
 
 
-## <img src="src/test/img/icons/Jenkins.png" width="25" height="25"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
-<p align="center">
-<a href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"><img src="src/test/img/jenkins main.png" alt="Jenkins"/></a>
-</p>
+## <img src="src/img/icons/Jenkins.png" width="40" height="40"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
 
+![Jenkins](src/img/jenkinsMain.png)
 
-![Jenkins](src/test/img/jenkins param.png)
+![Jenkins](src/img/jenkinsParam.png)
+
 
 
 ## Для локального запуска :
@@ -100,28 +99,32 @@ test
 -Dsize=${BROWSER_SIZE}
 ```
 ___
-## <img src="src/test/img/icons/Allure_Report.png" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/20/allure/">Allure report</a>
+## <img src="src/img/icons/Allure_Report.png" width="40" height="40"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/20/allure/">Allure report</a>
 
 ### Overview :
-![Allure](src/test/img/allure main.png)
+![allureMain](src/img/allureMain.png)
 
 ### Suites : 
-![Allure](src/test/img/allure example.png)
+![allureStats](src/img/allureExample.png)
+
 
 ### Graphs :
-![Allure](src/test/img/allure stats 1.png)
-![Allure](src/test/img/allure stats 2.png)
+![allureGraphs](src/img/allureStats1.png)                                                   
 
-#### <img src="src/test/img/icons/Telegram.png" width="25" height="25"  alt="Telegram"/></a> Отчет в телеграмм о результатах тестов :
+![allureGraphs2](src/img/allureStats2.png)
 
-![Telegram](src/test/img/telegram.png)
+
+
+## <img src="src/img/icons/Telegram.png" width="40" height="40"  alt="Telegram"/></a> Отчет в телеграмм о результатах тестов :
+
+![Telegram](src/img/telegram.png)
 
 
 ## Остались вопросы? 
 <a href="https://t.me/raboznik">
-<img src="src/test/img/icons/Telegram.png" width="25" height="25"  alt="Telegram"/></a> 
+<img src="src/img/icons/Telegram.png" width="50" height="50"  alt="Telegram"/></a> 
 
 <a href="mailto:raboznik@gmail.com">
-<img src="src/test/img/icons/gmail.png" width="25" height="25"  alt="Gmail"/></a>  
+<img src="src/img/icons/gmail.png" width="50" height="50"  alt="Gmail"/></a>  
 
 
