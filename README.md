@@ -1,12 +1,6 @@
 # Автотесты для сайта <a target="_blank" href="https://store.steampowered.com/">Steam</a>! 
-<img src="src/img/icons/Steam_2016_logo_black.svg.png" width="600" height="200"  alt="Steam"/>
+<img src="img/icons/Steam_2016_logo_black.svg.png" width="600" height="200"  alt="Steam"/>
 
-
-## Почему Steam?  
-
-- Во-первых, он известный
-- Во-вторых, на нем много интерактивных деталей на которые можно потыкать
-- В-третьих, он выдержан в темном стиле, а черное все делает крутым, да? 😎
 
 
 ## ✔️ Реализованы четыре теста для сайта :
@@ -24,7 +18,7 @@ Smoke тест заглавной страницы магазина. Цель э
 ✓ В цикле проверяются четыре вкладки с предложениями. При наведении на них мыши всплывает окно с соответствующей игрой 
 
 #### Пример прохождения теста : 
-![video](src/img/gif.gif)
+![video](img/gif.gif)
 
 
 #### - 2️⃣ **searchGameTest()**
@@ -36,7 +30,7 @@ Smoke тест заглавной страницы магазина. Цель э
 ✓ Href ведет именно на Dota 2
 
 #### Пример прохождения теста : 
-![video](src/img/gif.dota2.gif)
+![video](img/gif.dota2.gif)
 
 
 #### - 3️⃣ **loginTest()**
@@ -51,7 +45,7 @@ Smoke тест заглавной страницы магазина. Цель э
 
 
 #### Пример прохождения теста : 
-![video](src/img/gif.login.gif)
+![video](img/gif.login.gif)
 
 
 #### - 4️⃣ **steamChatTest()**
@@ -69,21 +63,21 @@ Smoke тест заглавной страницы магазина. Цель э
 ✓ Удаляем чат
 
 #### Пример прохождения теста : 
-![video](src/img/gif.chat.gif)
+![video](img/gif.chat.gif)
 
 
 
 ##  ⚒️  Используемые технологии и инструменты :
 
 
-![Java](src/img/icons/Java.png)![Gradle](src/img/icons/Gradle.png)![JUnit5](src/img/icons/JUnit5.png)![Intelij_IDEA](src/img/icons/Intelij_IDEA.png)![Selenoid](src/img/icons/Selenoid.png)![Selenide](src/img/icons/Selenide.png)![Allure Report](src/img/icons/Allure_Report.png)![Github](src/img/icons/Github.png)![Jenkins](src/img/icons/Jenkins.png)![Telegram](src/img/icons/Telegram.png)
+![Java](img/icons/Java.png)![Gradle](img/icons/Gradle.png)![JUnit5](img/icons/JUnit5.png)![Intelij_IDEA](img/icons/Intelij_IDEA.png)![Selenoid](img/icons/Selenoid.png)![Selenide](img/icons/Selenide.png)![Allure Report](img/icons/Allure_Report.png)![Github](img/icons/Github.png)![Jenkins](img/icons/Jenkins.png)![Telegram](img/icons/Telegram.png)
 
 
-## <img src="src/img/icons/Jenkins.png" width="40" height="40"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
+## <img src="img/icons/Jenkins.png" width="40" height="40"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
 
-![Jenkins](src/img/jenkinsMain.png)
+![Jenkins](img/jenkinsMain.png)
 
-![Jenkins](src/img/jenkinsParam.png)
+![Jenkins](img/jenkinsParam.png)
 
 
 
@@ -99,32 +93,32 @@ test
 -Dsize=${BROWSER_SIZE}
 ```
 ___
-## <img src="src/img/icons/Allure_Report.png" width="40" height="40"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/20/allure/">Allure report</a>
+## <img src="img/icons/Allure_Report.png" width="40" height="40"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/20/allure/">Allure report</a>
 
 ### Overview :
-![allureMain](src/img/allureMain.png)
+![allureMain](img/allureMain.png)
 
 ### Suites : 
-![allureStats](src/img/allureExample.png)
+![allureStats](img/allureExample.png)
 
 
 ### Graphs :
-![allureGraphs](src/img/allureStats1.png)                                                   
+![allureGraphs](img/allureStats1.png)                                                   
 
-![allureGraphs2](src/img/allureStats2.png)
+![allureGraphs2](img/allureStats2.png)
 
 
 
-## <img src="src/img/icons/Telegram.png" width="40" height="40"  alt="Telegram"/></a> Отчет в телеграмм о результатах тестов :
+## <img src="img/icons/Telegram.png" width="40" height="40"  alt="Telegram"/></a> Отчет в телеграмм о результатах тестов :
 
-![Telegram](src/img/telegram.png)
+![Telegram](img/telegram.png)
 
 
 ## Остались вопросы? 
 <a href="https://t.me/raboznik">
-<img src="src/img/icons/Telegram.png" width="50" height="50"  alt="Telegram"/></a> 
+<img src="img/icons/Telegram.png" width="50" height="50"  alt="Telegram"/></a> 
 
 <a href="mailto:raboznik@gmail.com">
-<img src="src/img/icons/gmail.png" width="50" height="50"  alt="Gmail"/></a>  
+<img src="img/icons/gmail.png" width="50" height="50"  alt="Gmail"/></a>  
 
 
