@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -46,6 +45,9 @@ public class SteamMainPageTest extends TestBase {
         open(baseUrl);
 
         element.scrollTo().shouldBe(visible);
+
+        sleep(1000);
+
 
         comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare).shouldBe(visible));
         element.$(".home_page_content .arrow", 1).click();
