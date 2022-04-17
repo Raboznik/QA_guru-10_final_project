@@ -15,8 +15,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class PageObjects extends TestBase {
 
-    List<SelenideElement> listForScrollElements = new ArrayList<>();
-
     private SelenideElement
             header = $("#global_header"),
             storeNavigation = $("#store_nav_area"),
@@ -80,6 +78,8 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (newreleases_content)")
     public PageObjects contentInTabNewReleasesShouldBeVisible() {
+        List<SelenideElement> listForScrollElements = new ArrayList<>();
+
         $("#tab_newreleases_content").scrollTo();
 
         for (int i = 0; i < 10; i++) {
@@ -94,6 +94,8 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (topsellers_content)")
     public PageObjects contentInTabTopSellersShouldBeVisible() {
+        List<SelenideElement> listForScrollElements = new ArrayList<>();
+
         $("#tab_topsellers_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
@@ -108,6 +110,8 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (upcoming_content)")
     public PageObjects contentInTabUpcomingContentShouldBeVisible() {
+        List<SelenideElement> listForScrollElements = new ArrayList<>();
+
         $("#tab_upcoming_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
@@ -122,7 +126,10 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (specials_content)")
     public PageObjects contentInTabSpecialsContentShouldBeVisible() {
+        List<SelenideElement> listForScrollElements = new ArrayList<>();
+
         $("#tab_specials_content_trigger").click();
+
         for (int i = 0; i < 10; i++) {
             listForScrollElements.add($("#tab_specials_content").find(".tab_item", i).shouldBe(visible));
         }
