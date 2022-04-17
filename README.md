@@ -3,9 +3,9 @@
 
 
 
-## ✔️ Реализованы четыре теста для сайта :
+## ✔️ Реализованы восемь тестов для сайта :
 
-#### - 1️⃣ **steamMainPageTest()** 
+#### - 1️⃣ **steamMainPageSmokeTestWithPageObjects()** 
 
 Smoke тест заглавной страницы магазина. Цель этого кейса убедиться, что основные элементы на главной странице магазина присутсвуют и выполняют бизнесс логику. Выполнен тест с помощью Page Object. ~~Все ведь любят PO?~~
 
@@ -66,6 +66,27 @@ Smoke тест заглавной страницы магазина. Цель э
 ![video](img/gif.chat.gif)
 
 
+#### - 5️⃣ **checkGroupOfElementsThatHaveSwitchArrows()**
+
+Параметризованный тест. Проверяется работоспособность стрелок переключения отображаемых элементов.
+
+✓ Логинимся на сайте магазина
+
+✓ Добавляем видимый элемент страницы в список
+
+✓ Переключаемся на другой элемент стрелочкой и тоже пакуем в список
+
+✓ Сравниваем эти элементы 
+
+✓ Возвращаемся к первому элементу стрелкой назад и повторно добавляем его в список  
+
+✓ Сравниваем первый и третий
+
+✓ Повторяем четыре раза для разных вкладок
+
+#### Пример прохождения теста :
+![video](img/gif_param.gif)
+
 
 ##  ⚒️  Используемые технологии и инструменты :
 
@@ -75,7 +96,7 @@ Smoke тест заглавной страницы магазина. Цель э
 
 ## <img src="img/icons/Jenkins.png" width="40" height="40"  alt="Jenkins"/></a> Jenkins <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/"> job </a>
 
-![Jenkins](img/jenkinsMain.png)
+![Jenkins](img/jenkins_main.png)
 
 ![Jenkins](img/jenkinsParam.png)
 
@@ -96,22 +117,22 @@ ___
 ## <img src="img/icons/Allure_Report.png" width="40" height="40"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_HW_Khyuchkov_Test/20/allure/">Allure report</a>
 
 ### Overview :
-![allureMain](img/allureMain.png)
+![allureMain](img/allureOverview.png)
 
 ### Suites : 
-![allureStats](img/allureExample.png)
+![allureStats](img/allureSuites.png)
 
 
 ### Graphs :
-![allureGraphs](img/allureStats1.png)                                                   
+![allureGraphs](img/allure_stats.png)                                                   
 
-![allureGraphs2](img/allureStats2.png)
+![allureGraphs2](img/allure_stats2.png)
 
 
 
 ## <img src="img/icons/Telegram.png" width="40" height="40"  alt="Telegram"/></a> Отчет в телеграмм о результатах тестов :
 
-![Telegram](img/telegram.png)
+![Telegram](img/telegramResult.png)
 
 
 ## Остались вопросы? 
