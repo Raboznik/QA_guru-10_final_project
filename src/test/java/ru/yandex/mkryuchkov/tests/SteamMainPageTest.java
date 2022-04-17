@@ -23,15 +23,15 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class SteamMainPageTest extends TestBase {
 
     private PageObjects steamMainPage = new PageObjects();
-    private String chatPhrase = "Hello World!";
     List<SelenideElement> comparisonList = new ArrayList<>();
+    private String chatPhrase = "Hello World!";
 
     static Stream<Arguments> argumentsForParametrisedTests() {
         return Stream.of(
-                Arguments.of($("#home_maincap_v7"), "featuredAndRecommended", 1, 2), //1-2 works +
-                Arguments.of($("#spotlight_carousel"), "spotlightCarousel", 0, 4),//0-4 работает + + + + + + +
-                Arguments.of($("#module_community_recommendations"), "communityRecommendation", 1, 2), //1-2 работает + + + + + + +
-                Arguments.of($(".specials_under10_content"), "cheapGames", 0, 4) //0,4 works + + +x
+                Arguments.of($("#home_maincap_v7"), "featuredAndRecommended", 1, 2),
+                Arguments.of($("#spotlight_carousel"), "spotlightCarousel", 0, 4),
+                Arguments.of($("#module_community_recommendations"), "communityRecommendation", 1, 2),
+                Arguments.of($(".specials_under10_content"), "cheapGames", 0, 4)
         );
     }
 
@@ -43,19 +43,23 @@ public class SteamMainPageTest extends TestBase {
     @MethodSource("argumentsForParametrisedTests")
     @ParameterizedTest(name = "Test elements : {index}: {1}")
     void checkGroupOfElementsThatHaveSwitchArrows(SelenideElement element, String name, int firstElementForCompare, int secondElementForCompare) {
-        loginTest();
-        element.scrollTo().shouldBe(visible);
-
-        comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare).shouldBe(visible));
-        element.$(".home_page_content .arrow", 1).click();
-        comparisonList.add(element.$(".app_impression_tracked", secondElementForCompare).shouldBe(visible));
-
-        assertNotEquals(comparisonList.get(0), comparisonList.get(1));
-
-        element.$(".home_page_content .arrow").click();
-        comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare));
-
-        assertEquals(comparisonList.get(0), comparisonList.get(2));
+        step("Sign in", this::loginTest);
+        step("Add first element to compare list", () -> {
+            element.scrollTo().shouldBe(visible);
+            comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare).shouldBe(visible));
+        });
+        step("Click right arrow", () ->
+                element.$(".home_page_content .arrow", 1).click());
+        step("Add second element to compare list", () ->
+                comparisonList.add(element.$(".app_impression_tracked", secondElementForCompare).shouldBe(visible)));
+        step("Compare first and second elements", () ->
+                assertNotEquals(comparisonList.get(0), comparisonList.get(1)));
+        step("Click left arrow", () ->
+                element.$(".home_page_content .arrow").click());
+        step("Add third element to compare list", () ->
+                comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare)));
+        step("Compare first and third elements", () ->
+                assertEquals(comparisonList.get(0), comparisonList.get(2)));
     }
 
     @DisplayName("Smoke test of Steam main page")
@@ -82,14 +86,13 @@ public class SteamMainPageTest extends TestBase {
     void searchGameTest() {
         step("Open main page", () ->
                 open(baseUrl));
-
         step("Click on search bar", () ->
                 $("#store_nav_search_term").click());
         step("Type searched game", () ->
                 $("#store_nav_search_term").setValue("Dota 2").pressEnter());
         step("Inspect search result list", () ->
                 $("#search_resultsRows").shouldBe(visible).$("a")
-                        .shouldHave(href("https://store.steampowered.com/app/570/Dota_2/?snr=1_7_7_151_150_1")));
+                        .shouldHave(href(baseUrl + "app/570/Dota_2/?snr=1_7_7_151_150_1")));
     }
 
     @DisplayName("Login test")
@@ -98,7 +101,7 @@ public class SteamMainPageTest extends TestBase {
         step("Open main page", () ->
                 open(baseUrl));
         step("Open login page", () ->
-                $("#global_action_menu").$(".global_action_link").click());
+                $("#global_action_menu .global_action_link").click());
         step("Type login", () -> {
             $("#input_username").click();
             $("#input_username").setValue(cfgs.login());
@@ -108,18 +111,17 @@ public class SteamMainPageTest extends TestBase {
             $("#input_password").setValue(cfgs.password());
         });
         step("Click login", () ->
-                $("#login_btn_signin").$(".login_btn").click());
+                $("#login_btn_signin .login_btn").click());
         step("Verify login", () ->
                 $("#account_pulldown").shouldHave(text(cfgs.login())));
     }
-
 
     @DisplayName("Steam chat test")
     @Test
     void steamChatTest() {
         step("Login in Steam", this::loginTest);
         step("Press chat button", () ->
-                $("#global_header").$(".supernav_container").$(".menuitem", 3).click());
+                $("#global_header .supernav_container .menuitem", 3).click());
         step("Create chat with user name", () -> {
             $(".createChatRoomButton").click();
             $(".nicknameInput").click();
@@ -131,7 +133,7 @@ public class SteamMainPageTest extends TestBase {
             $(".chatentry_chatTextarea_3e__5").setValue(chatPhrase).pressEnter();
         });
         step("Check the phrase in the chat history", () ->
-                $(".chatHistoryScroll").$(".LastMessageBlock").$(".messages_MsgWithAddons_lFLbk").$(".msgText")
+                $(".chatHistoryScroll .LastMessageBlock .messages_MsgWithAddons_lFLbk .msgText")
                         .shouldHave(text(chatPhrase)));
         step("Delete chat", () -> {
             $(".SVGIcon_ChatSettings").click();
