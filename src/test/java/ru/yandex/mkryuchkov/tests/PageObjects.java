@@ -15,6 +15,8 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class PageObjects extends TestBase {
 
+    List<SelenideElement> listForScrollElements = new ArrayList<>();
+
     private SelenideElement
             header = $("#global_header"),
             storeNavigation = $("#store_nav_area"),
@@ -78,18 +80,13 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (newreleases_content)")
     public PageObjects contentInTabNewReleasesShouldBeVisible() {
-        List<SelenideElement> list = new ArrayList<>();
-
         $("#tab_newreleases_content").scrollTo();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_newreleases_content").find(".tab_item", i).shouldBe(visible));
+            listForScrollElements.add($("#tab_newreleases_content").find(".tab_item", i).shouldBe(visible));
         }
-
-        for (SelenideElement e : list) {
-
+        for (SelenideElement e : listForScrollElements) {
             e.shouldBe(visible).hover();
-
             preview.shouldBe(visible);
         }
         return this;
@@ -97,18 +94,13 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (topsellers_content)")
     public PageObjects contentInTabTopSellersShouldBeVisible() {
-        List<SelenideElement> list = new ArrayList<>();
-
         $("#tab_topsellers_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_topsellers_content").find(".tab_item", i).shouldBe(visible));
+            listForScrollElements.add($("#tab_topsellers_content").find(".tab_item", i).shouldBe(visible));
         }
-
-        for (SelenideElement e : list) {
-
+        for (SelenideElement e : listForScrollElements) {
             e.shouldBe(visible).hover();
-
             preview.shouldBe(visible);
         }
         return this;
@@ -116,38 +108,26 @@ public class PageObjects extends TestBase {
 
     @Step("Inspect home tab content block (upcoming_content)")
     public PageObjects contentInTabUpcomingContentShouldBeVisible() {
-        List<SelenideElement> list = new ArrayList<>();
-
         $("#tab_upcoming_content_trigger").click();
 
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_upcoming_content").find(".tab_item", i).shouldBe(visible));
+            listForScrollElements.add($("#tab_upcoming_content").find(".tab_item", i).shouldBe(visible));
         }
-
-        for (SelenideElement e : list) {
-
+        for (SelenideElement e : listForScrollElements) {
             e.shouldBe(visible).hover();
-
             preview.shouldBe(visible);
         }
-
         return this;
     }
 
     @Step("Inspect home tab content block (specials_content)")
     public PageObjects contentInTabSpecialsContentShouldBeVisible() {
-        List<SelenideElement> list = new ArrayList<>();
-
         $("#tab_specials_content_trigger").click();
-
         for (int i = 0; i < 10; i++) {
-            list.add($("#tab_specials_content").find(".tab_item", i).shouldBe(visible));
+            listForScrollElements.add($("#tab_specials_content").find(".tab_item", i).shouldBe(visible));
         }
-
-        for (SelenideElement e : list) {
-
+        for (SelenideElement e : listForScrollElements) {
             e.shouldBe(visible).hover();
-
             preview.shouldBe(visible);
         }
         return this;

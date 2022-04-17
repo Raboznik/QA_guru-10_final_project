@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -27,14 +28,14 @@ public class SteamMainPageTest extends TestBase {
 
     static Stream<Arguments> argumentsForParametrisedTests() {
         return Stream.of(
-                Arguments.of($("#home_maincap_v7"), "featuredAndRecommended", 0, 1),
-                Arguments.of($("#spotlight_carousel"), "spotlightCarousel", 0, 4),
-                Arguments.of($("#module_community_recommendations"), "communityRecommendation", 1, 2),
-                Arguments.of($(".specials_under10_content"), "cheapGames", 0, 4)
+                Arguments.of($("#home_maincap_v7"), "featuredAndRecommended", 1, 2), //1-2 works +
+                Arguments.of($("#spotlight_carousel"), "spotlightCarousel", 0, 4),//0-4 работает + + + + + + +
+                Arguments.of($("#module_community_recommendations"), "communityRecommendation", 1, 2), //1-2 работает + + + + + + +
+                Arguments.of($(".specials_under10_content"), "cheapGames", 0, 4) //0,4 works + + +x
         );
     }
 
-    @DisplayName("A parameterized test with named arguments")
+    @DisplayName("A parameterized test for tabs, that have switch arrows")
     @Description("Check special offers tabs that have arrows." +
             " First of all add visible element to list, then press right arrow button." +
             " After it add another visible element to list, then compare it. They should not be equal." +
@@ -42,12 +43,8 @@ public class SteamMainPageTest extends TestBase {
     @MethodSource("argumentsForParametrisedTests")
     @ParameterizedTest(name = "Test elements : {index}: {1}")
     void checkGroupOfElementsThatHaveSwitchArrows(SelenideElement element, String name, int firstElementForCompare, int secondElementForCompare) {
-        open(baseUrl);
-
+        loginTest();
         element.scrollTo().shouldBe(visible);
-
-        sleep(1000);
-
 
         comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare).shouldBe(visible));
         element.$(".home_page_content .arrow", 1).click();
@@ -56,7 +53,7 @@ public class SteamMainPageTest extends TestBase {
         assertNotEquals(comparisonList.get(0), comparisonList.get(1));
 
         element.$(".home_page_content .arrow").click();
-        comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare).shouldBe(visible));
+        comparisonList.add(element.$(".app_impression_tracked", firstElementForCompare));
 
         assertEquals(comparisonList.get(0), comparisonList.get(2));
     }
@@ -85,6 +82,7 @@ public class SteamMainPageTest extends TestBase {
     void searchGameTest() {
         step("Open main page", () ->
                 open(baseUrl));
+
         step("Click on search bar", () ->
                 $("#store_nav_search_term").click());
         step("Type searched game", () ->
