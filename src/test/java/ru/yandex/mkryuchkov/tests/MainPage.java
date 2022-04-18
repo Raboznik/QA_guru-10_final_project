@@ -2,6 +2,8 @@ package ru.yandex.mkryuchkov.tests;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import ru.yandex.mkryuchkov.pages.components.FooterMenuComponent;
+import ru.yandex.mkryuchkov.pages.components.NavigationMenuComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,58 +11,49 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.href;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
-public class PageObjects extends TestBase {
+public class MainPage extends TestBase {
+
+    public NavigationMenuComponent navigationMenuComponent = new NavigationMenuComponent();
+    public FooterMenuComponent footerMenuComponent = new FooterMenuComponent();
 
     private SelenideElement
-            header = $("#global_header"),
             storeNavigation = $("#store_nav_area"),
             homePageGutter = $(".home_page_gutter"),
             popularContent = $(".big_buttons .button_container"),
             popularVrGames = $(".best_selling_vr_ctn .home_page_content .paging_capsules"),
             preview = $("#tab_preview_container"),
             liveStream = $("#live_streams_carousel"),
-            lowerLogin = $("#content_login"),
-            footer = $("#footer_text");
+            lowerLogin = $("#content_login");
 
-    @Step("Open main page")
-    public PageObjects openMainPage() {
-        open(baseUrl);
+
+    @Step("Open steam main page")
+    public MainPage openPage() {
+        open("");
         return this;
     }
 
-    @Step("Inspect Headers hrefs")
-    public PageObjects searchHrefsOfHeaderMenu() {
-        header.shouldBe(visible);
-
-        header.$(".supernav_container").find(".menuitem", 0).shouldHave(href(baseUrl + "?snr=1_4_4__global-header"));
-        header.$(".supernav_container").find(".menuitem", 1).shouldHave(href("https://steamcommunity.com/"));
-        header.$(".supernav_container").find(".menuitem", 2).shouldHave(href(baseUrl + "about/?snr=1_4_4__global-header"));
-        header.$(".supernav_container").find(".menuitem", 3).shouldHave(href("https://help.steampowered.com/en/"));
-
-        return this;
-    }
-
-    @Step("Inspect search bar")
-    public PageObjects searchFieldShouldBeVisible() {
+    @Step("Search game bar should be visible")
+    public MainPage searchFieldShouldBeVisible() {
         storeNavigation.shouldBe(visible);
         storeNavigation.$("#store_nav_search_term").shouldBe(visible);
 
         return this;
     }
 
-    @Step("Inspect blocks on the left side")
-    public PageObjects checkGutterBlockOnTheLeftSide() {
+    @Step("Check gutter block on the left side")
+    public MainPage checkGutterBlock() {
         homePageGutter.shouldBe(visible).$$(".home_page_gutter_block").shouldHave(size(4));
 
         return this;
     }
 
-    @Step("Inspect popular content block")
-    public PageObjects checkPopularContentTabHrefs() {
+    @Step("Check popular content block links")
+    public MainPage checkPopularContentTabHrefs() {
         popularContent.$(".big_button", 0).shouldHave(href(baseUrl + "explore/new/?snr=1_4_4__146"));
         popularContent.$(".big_button", 1).shouldHave(href(baseUrl + "search/?specials=1&snr=1_4_4__146"));
         popularContent.$(".big_button", 2).shouldHave(href(baseUrl + "genre/Free to Play/?snr=1_4_4__146"));
@@ -69,15 +62,15 @@ public class PageObjects extends TestBase {
         return this;
     }
 
-    @Step("Inspect popular VR games")
-    public PageObjects popularVrGamesTabShouldBeVisible() {
+    @Step("Popular VR games should be visible")
+    public MainPage popularVrGamesTabShouldBeVisible() {
         popularVrGames.$(".carousel_items").scrollTo().shouldBe(visible);
 
         return this;
     }
 
-    @Step("Inspect home tab content block (newreleases_content)")
-    public PageObjects contentInTabNewReleasesShouldBeVisible() {
+    @Step("Home tab content block (newreleases_content) all elements should be visible")
+    public MainPage contentInTabNewReleasesShouldBeVisible() {
         List<SelenideElement> listForScrollElements = new ArrayList<>();
 
         $("#tab_newreleases_content").scrollTo();
@@ -92,8 +85,8 @@ public class PageObjects extends TestBase {
         return this;
     }
 
-    @Step("Inspect home tab content block (topsellers_content)")
-    public PageObjects contentInTabTopSellersShouldBeVisible() {
+    @Step("Inspect home tab content block (topsellers_content) all elements should be visible")
+    public MainPage contentInTabTopSellersShouldBeVisible() {
         List<SelenideElement> listForScrollElements = new ArrayList<>();
 
         $("#tab_topsellers_content_trigger").click();
@@ -108,8 +101,8 @@ public class PageObjects extends TestBase {
         return this;
     }
 
-    @Step("Inspect home tab content block (upcoming_content)")
-    public PageObjects contentInTabUpcomingContentShouldBeVisible() {
+    @Step("Inspect home tab content block (upcoming_content) all elements should be visible")
+    public MainPage contentInTabUpcomingContentShouldBeVisible() {
         List<SelenideElement> listForScrollElements = new ArrayList<>();
 
         $("#tab_upcoming_content_trigger").click();
@@ -124,8 +117,8 @@ public class PageObjects extends TestBase {
         return this;
     }
 
-    @Step("Inspect home tab content block (specials_content)")
-    public PageObjects contentInTabSpecialsContentShouldBeVisible() {
+    @Step("Inspect home tab content block (specials_content) all elements should be visible")
+    public MainPage contentInTabSpecialsContentShouldBeVisible() {
         List<SelenideElement> listForScrollElements = new ArrayList<>();
 
         $("#tab_specials_content_trigger").click();
@@ -140,29 +133,17 @@ public class PageObjects extends TestBase {
         return this;
     }
 
-    @Step("Inspect live stream block")
-    public PageObjects liveStreamTabShouldBeVisible() {
+    @Step("Live stream block should be visible")
+    public MainPage liveStreamTabShouldBeVisible() {
         liveStream.$(".carousel_items .focus").scrollTo().shouldBe(visible);
 
         return this;
     }
 
-    @Step("Inspect Lower Login")
-    public PageObjects checkBigButtonLoginHref() {
+    @Step("Check lower Login link")
+    public MainPage checkBigButtonLoginHref() {
         lowerLogin.scrollTo().shouldBe(visible)
                 .$(".btn_green_white_innerfade").shouldHave(href(baseUrl + "login/?snr=1_4_4__more-content-login"));
-
-        return this;
-    }
-
-    @Step("Inspect footer links")
-    public PageObjects checkFootersHrefs() {
-        footer.scrollTo().shouldBe(visible);
-        footer.find("div", 1).find("a", 0).shouldHave(href(baseUrl + "privacy_agreement/?snr=1_44_44_"));
-        footer.find("div", 1).find("a", 1).shouldHave(href(baseUrl + "legal/?snr=1_44_44_"));
-        footer.find("div", 1).find("a", 2).shouldHave(href(baseUrl + "subscriber_agreement/?snr=1_44_44_"));
-        footer.find("div", 1).find("a", 3).shouldHave(href(baseUrl + "steam_refunds/?snr=1_44_44_"));
-        footer.find("div", 1).find("a", 4).shouldHave(href(baseUrl + "account/cookiepreferences/?snr=1_44_44_"));
 
         return this;
     }

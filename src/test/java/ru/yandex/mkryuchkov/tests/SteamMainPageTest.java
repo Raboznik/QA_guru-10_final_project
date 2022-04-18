@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SteamMainPageTest extends TestBase {
 
-    private PageObjects steamMainPage = new PageObjects();
+    private MainPage steamMainPage = new MainPage();
+
     List<SelenideElement> comparisonList = new ArrayList<>();
     private String chatPhrase = "Hello World!";
 
@@ -41,7 +43,7 @@ public class SteamMainPageTest extends TestBase {
             " After it add another visible element to list, then compare it. They should not be equal." +
             "Then press left arrow, add third visible element to list. First and third element should be equal")
     @MethodSource("argumentsForParametrisedTests")
-    @ParameterizedTest(name = "Test elements : {index}: {1}")
+    @ParameterizedTest(name = "Test element {index} : {1}")
     void checkGroupOfElementsThatHaveSwitchArrows(SelenideElement element, String name, int firstElementForCompare, int secondElementForCompare) {
         step("Sign in", this::loginTest);
         step("Add first element to compare list", () -> {
@@ -65,11 +67,12 @@ public class SteamMainPageTest extends TestBase {
     @DisplayName("Smoke test of Steam main page")
     @Test
     void steamMainPageSmokeTestWithPageObjects() {
+
         steamMainPage
-                .openMainPage()
-                .searchHrefsOfHeaderMenu()
+                .openPage()
+                .navigationMenuComponent.searchHrefsOfHeaderMenu(steamMainPage)
                 .searchFieldShouldBeVisible()
-                .checkGutterBlockOnTheLeftSide()
+                .checkGutterBlock()
                 .checkPopularContentTabHrefs()
                 .popularVrGamesTabShouldBeVisible()
                 .contentInTabNewReleasesShouldBeVisible()
@@ -78,14 +81,14 @@ public class SteamMainPageTest extends TestBase {
                 .contentInTabSpecialsContentShouldBeVisible()
                 .liveStreamTabShouldBeVisible()
                 .checkBigButtonLoginHref()
-                .checkFootersHrefs();
+                .footerMenuComponent.checkFootersHrefs(steamMainPage);
     }
 
     @DisplayName("Search game test")
     @Test
     void searchGameTest() {
         step("Open main page", () ->
-                open(baseUrl));
+                open(""));
         step("Click on search bar", () ->
                 $("#store_nav_search_term").click());
         step("Type searched game", () ->
@@ -99,7 +102,7 @@ public class SteamMainPageTest extends TestBase {
     @Test
     void loginTest() {
         step("Open main page", () ->
-                open(baseUrl));
+                open(""));
         step("Open login page", () ->
                 $("#global_action_menu .global_action_link").click());
         step("Type login", () -> {

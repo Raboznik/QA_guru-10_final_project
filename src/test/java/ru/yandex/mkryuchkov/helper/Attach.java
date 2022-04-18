@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
+import static ru.yandex.mkryuchkov.tests.TestBase.cfgs;
 
 public class Attach {
 
@@ -45,7 +46,7 @@ public class Attach {
     }
 
     public static URL getVideoUrl(String sessionId) {
-        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4";
+        String videoUrl = cfgs.remoteUrl() + sessionId + ".mp4";
 
         try {
             return new URL(videoUrl);
@@ -55,7 +56,7 @@ public class Attach {
         return null;
     }
 
-    public static String getSessionId(){
+    public static String getSessionId() {
         return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
     }
 }

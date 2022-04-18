@@ -16,13 +16,10 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class TestBase {
 
-    String baseUrl = "https://store.steampowered.com/";
-    static CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
+    public static CredentialsConfig cfgs = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void setUp() {
-
-
         String browser = System.getProperty("browser", "chrome");
         String size = System.getProperty("size", "1920x1080");
 
@@ -30,6 +27,7 @@ public class TestBase {
         String login = System.getProperty("login", cfgs.remoteLogin());
         String pass = System.getProperty("pass", cfgs.remotePassword());
 
+        Configuration.baseUrl = "https://store.steampowered.com/";
         Configuration.remote = "https://" + login + ":" + pass + "@" + remoteUrl;
         Configuration.browser = browser;
         Configuration.browserSize = size;
@@ -43,7 +41,6 @@ public class TestBase {
 
         Attach.attachAsText("Browser: ", browser);
         Attach.attachAsText("Remote Url: ", cfgs.remoteUrl());
-
     }
 
     @AfterEach
@@ -55,5 +52,4 @@ public class TestBase {
         sleep(5000);
         closeWebDriver();
     }
-
 }
