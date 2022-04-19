@@ -1,4 +1,4 @@
-package ru.yandex.mkryuchkov.tests;
+package com.steampowered.mkryuchkov.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -7,8 +7,8 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import ru.yandex.mkryuchkov.config.CredentialsConfig;
-import ru.yandex.mkryuchkov.helper.Attach;
+import com.steampowered.mkryuchkov.config.CredentialsConfig;
+import com.steampowered.mkryuchkov.helper.Attach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.sleep;

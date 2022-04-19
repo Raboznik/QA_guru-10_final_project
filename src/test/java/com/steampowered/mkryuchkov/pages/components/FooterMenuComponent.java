@@ -1,9 +1,9 @@
-package ru.yandex.mkryuchkov.pages.components;
+package com.steampowered.mkryuchkov.pages.components;
 
 import com.codeborne.selenide.SelenideElement;
+import com.steampowered.mkryuchkov.pages.MainPage;
+import com.steampowered.mkryuchkov.tests.TestBase;
 import io.qameta.allure.Step;
-import ru.yandex.mkryuchkov.tests.MainPage;
-import ru.yandex.mkryuchkov.tests.TestBase;
 
 import static com.codeborne.selenide.Condition.href;
 import static com.codeborne.selenide.Condition.visible;

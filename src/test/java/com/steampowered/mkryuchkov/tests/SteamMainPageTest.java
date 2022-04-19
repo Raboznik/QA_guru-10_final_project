@@ -1,4 +1,4 @@
-package ru.yandex.mkryuchkov.tests;
+package com.steampowered.mkryuchkov.tests;
 
 
 import com.codeborne.selenide.SelenideElement;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import com.steampowered.mkryuchkov.pages.MainPage;
 
 import java.util.ArrayList;
 import java.util.List;

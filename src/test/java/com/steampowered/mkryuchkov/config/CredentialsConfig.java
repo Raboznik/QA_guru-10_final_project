@@ -1,4 +1,4 @@
-package ru.yandex.mkryuchkov.config;
+package com.steampowered.mkryuchkov.config;
 
 import org.aeonbits.owner.Config;
 

@@ -1,6 +1,7 @@
-package ru.yandex.mkryuchkov.helper;
+package com.steampowered.mkryuchkov.helper;
 
 import com.codeborne.selenide.Selenide;
+import com.steampowered.mkryuchkov.tests.TestBase;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -12,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
-import static ru.yandex.mkryuchkov.tests.TestBase.cfgs;
 
 public class Attach {
 
@@ -46,7 +46,7 @@ public class Attach {
     }
 
     public static URL getVideoUrl(String sessionId) {
-        String videoUrl = cfgs.remoteUrl() + sessionId + ".mp4";
+        String videoUrl = TestBase.cfgs.remoteUrl() + sessionId + ".mp4";
 
         try {
             return new URL(videoUrl);

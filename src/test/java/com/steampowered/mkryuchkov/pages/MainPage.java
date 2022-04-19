@@ -1,9 +1,10 @@
-package ru.yandex.mkryuchkov.tests;
+package com.steampowered.mkryuchkov.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.steampowered.mkryuchkov.pages.components.FooterMenuComponent;
+import com.steampowered.mkryuchkov.pages.components.NavigationMenuComponent;
+import com.steampowered.mkryuchkov.tests.TestBase;
 import io.qameta.allure.Step;
-import ru.yandex.mkryuchkov.pages.components.FooterMenuComponent;
-import ru.yandex.mkryuchkov.pages.components.NavigationMenuComponent;
 
 import java.util.ArrayList;
 import java.util.List;
